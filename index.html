@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>VISO LAB</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script>
+    // define the callAPI function that takes a first name and last name as parameters
+    var callAPI = (firstName,lastName,email)=>{
+        // instantiate a headers object
+        var myHeaders = new Headers();
+        // add content type header to object
+        myHeaders.append("Content-Type", "application/json");
+        // using built in JSON utility package turn object to string and store in a variable
+        var raw = JSON.stringify({"firstName":firstName,"lastName":lastName, "email":email});
+        // create a JSON object with parameters for API call and store in a variable
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+        // make API call with parameters and use promises to get response
+        fetch("https://3p0wza36q7.execute-api.eu-west-2.amazonaws.com/dev", requestOptions)
+        .then(response => response.text())
+        .then(result => alert(JSON.parse(result).body))
+        .catch(error => console.log('error', error));
+    }
+</script>
+</head>
+<body>
+
+<!-- Header -->
+<header class="w3-display-container w3-content w3-center" style="max-width:1500px">
+  <img class="w3-image" src="https://images.unsplash.com/photo-1604964432806-254d07c11f32?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="HOME" width="1500" height="300">
+  <div class="w3-display-middle w3-padding-large w3-border w3-wide w3-text-light-grey w3-center">
+    <h1 class="w3-hide-medium w3-hide-small w3-xxxlarge">VISO LAB</h1>
+    <h5 class="w3-hide-large" style="white-space:nowrap">VISO LAB</h5>
+    <h3 class="w3-hide-medium w3-hide-small">Group 1</h3>
+    <form>
+        <div class="w3-section" id="contact">
+            <label>First Name :</label>
+            <input class="w3-input w3-border" type="text" required type="text" id="fName">
+            <label>Last Name :</label>
+            <input class="w3-input w3-border" type="text" required id="lName">
+            <label>email :</label>
+            <input class="w3-input w3-border" type="text" required id="email">
+            <!-- set button onClick method to call function we defined passing input values as parameters -->
+            <button type="submit" class="w3-button w3-block w3-dark-grey" onclick="callAPI(document.getElementById('fName').value,document.getElementById('lName').value,document.getElementById('email').value)">Call API</button>
+        </div>
+    </form>
+  </div>
+  
+  <!-- Navbar (placed at the bottom of the header image) -->
+  <div class="w3-bar w3-light-grey w3-round w3-display-bottommiddle w3-hide-small" style="bottom:-16px">
+    <a href="#" class="w3-bar-item w3-button">Home</a>
+
+    <a href="#contact" class="w3-bar-item w3-button">Join the Group</a>
+  </div>
+</header>
+
+<!-- Navbar on small screens -->
+<div class="w3-center w3-light-grey w3-padding-16 w3-hide-large w3-hide-medium">
+<div class="w3-bar w3-light-grey">
+  <a href="#contact" class="w3-bar-item w3-button">top page</a>
+</div>
+</div>
+<!-- Page content -->
+<div class="w3-content w3-padding-large w3-margin-top" >
+
+  <!-- Contact -->
+  <div class="w3-light-grey w3-padding-large w3-padding-32 w3-margin-top" id="contact">
+<br>
+    <!-- Images (Portfolio) -->
+  <img src="https://images.unsplash.com/photo-1591024622168-fa91b5df0c86?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1050&q=80" alt="Ocean" class="w3-image" width="33%">
+  <img src="https://images.unsplash.com/photo-1602992708529-c9fdb12905c9?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="Ocean II" class="w3-image w3-margin-top" width="32%">
+  <img src="https://images.unsplash.com/photo-1484417894907-623942c8ee29?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1189&q=80" alt="Falls" class="w3-image w3-margin-top" width="33%">
+<!-- End page content -->
+<p>Powered by Vincenzo Somma</p>
+</div>
+
+</div>
+
+</body>
+</html>
